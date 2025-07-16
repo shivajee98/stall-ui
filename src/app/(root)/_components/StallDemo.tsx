@@ -12,7 +12,7 @@ const StallDemo = () => {
             <div className="h-full w-[3px] bg-black"></div>
           </div>
           <div className="bg-gray-300 h-[10vh] w-[65vh] flex justify-center items-center">
-            <div className="lg:text-6xl text-xl text-black">Company Name</div>
+            <div className="lg:text-4xl text-xl text-black">Company Name</div>
           </div>
         </div>
       </div>
