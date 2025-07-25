@@ -1,17 +1,8 @@
-import React from 'react'
-import dynamic from 'next/dynamic'
+'use client';
 
-const Stall = dynamic(() => import("./_components/Stall"), {
-    ssr: false,
-})
+import dynamic from 'next/dynamic';
 
- const Home = () => {
-  return (
-    <div className='bg-yellow-400/80'>
-        <Stall />
-    </div>
-  )
-}
+const Stall = dynamic(() => import('./_components/Stall'), { ssr: false });
 
-
-export default Home
+export default function ClientStall() {
+  return <Stall />}
