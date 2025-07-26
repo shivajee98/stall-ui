@@ -4,10 +4,56 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
+// Define interfaces for type safety
+interface ProductImage {
+  url: string;
+}
+
+interface Product {
+  ID: number;
+  title: string;
+  category: string;
+  productType: string;
+  price: number;
+  quantity: number;
+  tags?: string;
+  images?: ProductImage[];
+}
+
+interface RevenueInfo {
+  revenueBracket: string;
+  userImpact: number;
+}
+
+interface FundingInfo {
+  fundingType: string;
+}
+
+interface Director {
+  directorName: string;
+}
+
+interface SPOC {
+  Name: string;
+  Email: string;
+}
+
+interface CompanyData {
+  name: string;
+  banner?: string;
+  logo?: string;
+  websiteURL?: string;
+  products?: Product[];
+  revenueInfo?: RevenueInfo;
+  fundingInfo?: FundingInfo;
+  director?: Director;
+  spoc?: SPOC;
+}
+
 const Stall = () => {
-  const [companyData, setCompanyData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [companyData, setCompanyData] = useState<CompanyData | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchCompanyData = async () => {
@@ -16,10 +62,12 @@ const Stall = () => {
         if (!response.ok) {
           throw new Error('Failed to fetch company data');
         }
-        const data = await response.json();
+        const data: CompanyData = await response.json();
         setCompanyData(data);
       } catch (err) {
-        setError(err.message);
+        // Properly handle the unknown error type
+        const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
@@ -132,9 +180,11 @@ const Stall = () => {
                   <h3 className="text-lg font-semibold mb-2">Company Information</h3>
                   <div className="space-y-2 text-sm">
                     <p><span className="font-medium">Website:</span> 
-                      <a href={companyData?.websiteURL} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline ml-1">
-                        {companyData?.websiteURL}
-                      </a>
+                      {companyData?.websiteURL && (
+                        <a href={companyData.websiteURL} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline ml-1">
+                          {companyData.websiteURL}
+                        </a>
+                      )}
                     </p>
                     <p><span className="font-medium">Revenue:</span> {companyData?.revenueInfo?.revenueBracket}</p>
                     <p><span className="font-medium">User Impact:</span> {companyData?.revenueInfo?.userImpact?.toLocaleString()}</p>
