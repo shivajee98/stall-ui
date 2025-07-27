@@ -101,7 +101,7 @@ const Stall = () => {
             <div className="h-full w-[3px] bg-black"></div>
             <div className="h-full w-[3px] bg-black"></div>
           </div>
-          <div className="bg-gray-300 h-[10vh] lg:w-[65vw] max-sm:w-[80vw] md:w-[80vw] flex justify-center items-center sm:landscape:w-[70vw]">
+          <div className="bg-white h-[10vh] lg:w-[65vw] max-sm:w-[80vw] md:w-[80vw] flex justify-center items-center sm:landscape:w-[70vw]">
             <div className="lg:text-5xl text-xl text-black">{companyData?.name || "Company Name"}</div>
           </div>
         </div>
